@@ -1,9 +1,4 @@
-all : test_complexplane
-
-test_complex: cplane.o
-
-run :
-	./test_complexplane
-
+mandlebrot:cplane.cpp cplane.hpp julia.cpp julia.h mandelbrot.cpp
+	g++ -o mandelbrot mandelbrot.cpp julia.cpp cplane.cpp
 clean:
-	rm -f  test_complexplane  test_complexplane.o
+	$(RM) mandelbrot.o

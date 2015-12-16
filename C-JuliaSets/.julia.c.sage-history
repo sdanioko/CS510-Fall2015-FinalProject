@@ -1,0 +1,166 @@
+"/*******************************************************\nThis file contains the implimentation of the Julia Set. \n ******************************************************/\n\n#include <stdlib.h>\n#include <stdio.h>\n#include <string.h>\n#include <assert.h>\n#include \"cplane.h\"\n\nint main(int argc, char *argv[]){\n\n        // Variable for cplane\n        long double xmin;\n        long double xmax;\n        long double ymin;\n        long double ymax;\n        unsigned long int xpoints;\n        unsigned long int ypoints;\n\n        // Variable for complex number,C\n        COMPLEX compC;\n\n        if(argc!=9){ // 9 = 8(number of parameters) + 1 ( the name of the program) \n            // Not enough parameter\n            return;\n        }\n\n        // Get input from user\n        sscanf(argv[1],\"%Lf\",&xmin); // store the first argument\n        sscanf(argv[2],\"%Lf\",&xmax); // store the second argument\n        sscanf(argv[3],\"%Lf\",&ymin); // store the third argument\n        sscanf(argv[4],\"%Lf\",&ymax); // store the fourth argument\n        sscanf(argv[5],\"%ld\",&xpoints); // store the fifth argument\n        sscanf(argv[6],\"%ld\",&ypoints); // store the sixth argument\n        sscanf(argv[7],\"%Lf\",&compC.x_realpart); // store the real part of a complex\n        sscanf(argv[8],\"%Lf\",&compC.y_imagpart); // store the imag part of the same complex\n\n        // Create complex plane\n        CPLANE cplane1; // Declare a complex plane object\n        cplane1 = init_cplane(xmin,xmax,ymin,ymax,xpoints,ypoints);  // use the constructor to initial the declared plane\n\n\n        // Interate over complex plane\n        int out;\n        int x,y;\n        for(y=0;y<cplane1.ypoints;y++){\n            for(x=0;x<cplane1.xpoints;x++){\n                //printf(\"%Lf %Lf \\n\",cplane1.mat[y][x].x_realpart,cplane1.mat[y][x].y_imagpart);\n\n                // Calculate Julia set\n                COMPLEX tmp = cplane1.mat[y][x];\n                for(out=0;out<1000;out++){\n                    tmp = juliamap(&tmp,&compC);\n                    // Check if outside the radius\n                    long double rad = tmp.x_realpart*tmp.x_realpart + tmp.y_imagpart*tmp.y_imagpart;\n                    if(rad>4) break;\n                }\n                printf(\"%Lf %Lf %d\\n\",cplane1.mat[y][x].x_realpart,cplane1.mat[y][x].y_imagpart,out);\n            }\n            //printf(\"\\n\");   // Added for gnuplot\n        }\n        return 0;\n}\n\n"
+{"patch":[[[[0,"********"],[1,"*******"],[0,"\nThis fi"]],48,48,16,23]],"time":1450225934789}
+{"patch":[[[[0,"********"],[1,"**********************************************"],[0,"\nThis fi"]],55,55,16,62]],"time":1450225932782}
+{"patch":[[[[0,"********"],[1,"*"],[0,"\nThis fi"]],101,101,16,17]],"time":1450225930761}
+{"patch":[[[[0,"********"],[-1,"/"],[0,"\n\n#inclu"]],215,215,17,16]],"time":1450225928078}
+{"patch":[[[[0,"********"],[1,"*********"],[0,"\n\n#inclu"]],215,215,16,25]],"time":1450225925728}
+{"patch":[[[[0,"********"],[1,"**********************************************"],[0,"\n\n#inclu"]],224,224,16,62]],"time":1450225923725}
+{"patch":[[[[0,"********"],[1,"/"],[0,"\n\n#inclu"]],270,270,16,17]],"time":1450225921706}
+{"patch":[[[[0," Set"],[-1,". "],[0,"\n **"]],161,161,10,8]],"time":1450225889866}
+{"patch":[[[[0,"e Ju"],[-1,"lia Set"],[0,"\n **"]],154,154,15,8]],"time":1450225887867}
+{"patch":[[[[0," of "],[-1,"the Ju"],[0,"\n **"]],148,148,14,8]],"time":1450225885868}
+{"patch":[[[[0,"lime"],[-1,"ntation of "],[0,"\n **"]],137,137,19,8]],"time":1450225883866}
+{"patch":[[[[0,"e im"],[-1,"plime"],[0,"\n **"]],132,132,13,8]],"time":1450225881866}
+{"patch":[[[[0,"onta"],[-1,"ins the im"],[0,"\n **"]],122,122,18,8]],"time":1450225879872}
+{"patch":[[[[0,"file"],[1,"s"],[0," "],[-1,"conta"],[0,"\n **"]],116,116,14,10]],"time":1450225877869}
+{"patch":[[[[0,"is f"],[-1,"iles "],[0,"\n **"]],113,113,13,8]],"time":1450225873865}
+{"patch":[[[[0,"***\n"],[-1,"This f"],[0,"\n **"]],107,107,14,8]],"time":1450225871864}
+{"patch":[[[[0,"*******\n"],[1,"   "],[0,"\n ******"]],103,103,16,19]],"time":1450225869856}
+{"patch":[[[[0,"****\n   "],[1,"                 "],[0,"\n ******"]],106,106,16,33]],"time":1450225867854}
+{"patch":[[[[0,"        "],[1,"                                                             "],[0,"\n ******"]],123,123,16,77]],"time":1450225865853}
+{"patch":[[[[0,"        "],[1,"                     "],[0,"\n ******"]],184,184,16,37]],"time":1450225863839}
+{"patch":[[[[0,"        "],[1,"*"],[0,"\n ******"]],205,205,16,17]],"time":1450225861870}
+{"patch":[[[[0,"******\n "],[1,"* In here"],[0,"        "]],104,104,16,25]],"time":1450225858760}
+{"patch":[[[[0," In here"],[1,", we work on complex numbers and some arithmetic operations "],[0,"        "]],113,113,16,76]],"time":1450225856756}
+{"patch":[[[[0,"rations "],[1,"whose  arguments are complex numbers.  "],[0,"        "]],173,173,16,55]],"time":1450225854736}
+{"patch":[[[[0,"umbers. "],[1," * \n *"],[0,"        "]],211,211,16,22]],"time":1450225852729}
+{"patch":[[[[0,".  * \n *"],[1," For, we will need to define a data type  named struct complex."],[0,"        "]],217,217,16,79]],"time":1450225850728}
+{"patch":[[[[0,"omplex. "],[1,"In this, any object of type struct comp.   *\n\n * Furthermore,"],[0,"        "]],281,281,16,77]],"time":1450225848636}
+{"patch":[[[[0,"hermore,"],[1," we will be testing the validity of the differengt functions w"],[0,"        "]],342,342,16,78]],"time":1450225846602}
+{"patch":[[[[0,"ctions w"],[1,"e defined. In order to do that, *\n * we will b"],[0,"        "]],404,404,16,62]],"time":1450225844559}
+{"patch":[[[[0,"e will b"],[1,"e comparing some expected values some computed ones"],[0,"        "]],450,450,16,67]],"time":1450225842558}
+{"patch":[[[[0,"ted ones"],[1,", where the computed  values are obtained by  *\n * doing the"],[0,"        "]],501,501,16,76]],"time":1450225840551}
+{"patch":[[[[0,"ing the "],[1,"targeted operationby hands and the computed vales are obtai "],[0,"        "]],562,562,16,76]],"time":1450225838551}
+{"patch":[[[[0,"re obtai"],[1,"ned via the function we build in our *\n * code"],[0,"        "]],621,621,16,62]],"time":1450225836543}
+{"patch":[[[[0,"        "],[1," "],[0,"*\n *****"]],768,768,16,17]],"time":1450225834523}
+{"patch":[[[[0," pro"],[-1,"gram"],[0,") \n "]],1371,1371,12,8]],"time":1449780793960}
+{"patch":[[[[0,"ame "],[-1,"of the pr"],[0,"o) \n"]],1361,1361,17,8]],"time":1449780789921}
+{"patch":[[[[0,"he n"],[-1,"ame o"],[0,") \n "]],1357,1357,13,8]],"time":1449780788919}
+{"patch":[[[[0,"+ 1 "],[-1,"( the n)"],[0," \n  "]],1350,1350,16,8]],"time":1449780786390}
+{"patch":[[[[0,") + "],[-1,"1  "],[0,"\n   "]],1348,1348,11,8]],"time":1449780782312}
+{"patch":[[[[0,"paramete"],[-1,"rs"],[0,") + \n   "]],1338,1338,18,16]],"time":1449780780256}
+{"patch":[[[[0," of para"],[-1,"mete"],[0,") + \n   "]],1334,1334,20,16]],"time":1449780778253}
+{"patch":[[[[0,"mber"],[-1," of para"],[0,") + "]],1330,1330,16,8]],"time":1449780776246}
+{"patch":[[[[0,"9 = 8(nu"],[-1,"mber"],[0,") + \n   "]],1322,1322,20,16]],"time":1449780774272}
+{"patch":[[[[0,"9 = 8(nu"],[1,"mber "],[0,") + \n   "]],1322,1322,16,21]],"time":1449780772285}
+{"patch":[[[[0,"(number "],[1,"of argument"],[0,") + \n   "]],1327,1327,16,27]],"time":1449780770226}
+{"patch":[[[[0,"argument"],[1,"s"],[0,") + \n   "]],1338,1338,16,17]],"time":1449780768336}
+{"patch":[[[[0,"argument"],[-1,"s"],[0,") + \n   "]],1338,1338,17,16]],"time":1449780767358}
+{"patch":[[[[0," of argu"],[-1,"ment"],[0,") + \n   "]],1334,1334,20,16]],"time":1449780763324}
+{"patch":[[[[0,"umber of"],[-1," argu"],[0,") + \n   "]],1329,1329,21,16]],"time":1449780761313}
+{"patch":[[[[0,"8(number"],[-1," of"],[0,") + \n   "]],1326,1326,19,16]],"time":1449780759476}
+{"patch":[[[[0,"/ 9 = 8("],[-1,"number"],[0,") + \n   "]],1320,1320,22,16]],"time":1449780757378}
+{"patch":[[[[0," = 8"],[-1,"()"],[1," "],[0," + \n"]],1323,1323,10,9]],"time":1449780755638}
+{"patch":[[[[0,"/ 9 = 8 "],[-1," "],[0,"+ \n     "]],1320,1320,17,16]],"time":1449780753607}
+{"patch":[[[[0,"// 9 = 8"],[-1," + "],[0,"\n       "]],1319,1319,19,16]],"time":1449780751417}
+{"patch":[[[[0," // 9 = "],[-1,"8"],[0,"\n       "]],1318,1318,17,16]],"time":1449780749288}
+{"patch":[[[[0,"){ // 9 "],[-1,"= "],[0,"\n       "]],1316,1316,18,16]],"time":1449780748024}
+{"patch":[[[[0,"){ // 9 "],[1,"because in we have in total "],[0,"\n       "]],1316,1316,16,44]],"time":1449780745481}
+{"patch":[[[[0,"n to"],[-1,"tal "],[0,"\n   "]],1344,1344,12,8]],"time":1449780741250}
+{"patch":[[[[0,"ave "],[-1,"in to"],[0,"\n   "]],1339,1339,13,8]],"time":1449780739208}
+{"patch":[[[[0,"in w"],[-1,"e have "],[0,"\n   "]],1332,1332,15,8]],"time":1449780737197}
+{"patch":[[[[0,"ause in "],[-1,"w"],[0,"\n       "]],1327,1327,17,16]],"time":1449780735309}
+{"patch":[[[[0,"because "],[-1,"in "],[0,"\n       "]],1324,1324,19,16]],"time":1449780718182}
+{"patch":[[[[0,"// 9"],[-1," because "],[0,"\n   "]],1319,1319,17,8]],"time":1449780716335}
+{"patch":[[[[0,"=9){ // "],[-1,"9"],[0,"\n       "]],1314,1314,17,16]],"time":1449780714162}
+{"patch":[[[[0,"gc!=9){ "],[-1,"// "],[0,"\n       "]],1311,1311,19,16]],"time":1449780704013}
+{"patch":[[[[0,"rgc!=9){"],[-1," "],[0,"\n       "]],1310,1310,17,16]],"time":1449780702115}
+{"patch":[[[[0,"gc!="],[-1,"9"],[0,"){\n "]],1311,1311,9,8]],"time":1449778760089}
+{"patch":[[[[0,"f(argc!="],[1,"8"],[0,"){\n     "]],1307,1307,16,17]],"time":1449778758084}
+{"patch":[[[[0,"f(argc!="],[-1,"8"],[1,"9"],[0,"){\n     "]],1307,1307,17,17]],"time":1449634418494}
+{"patch":[[[[0,"decl"],[-1,"ared plane"],[0,"\n\n\n "]],2190,2190,18,8]],"time":1449520173345}
+{"patch":[[[[0," the dec"],[-1,"l"],[1,"alr"],[0,"\n\n\n     "]],2185,2185,17,19]],"time":1449520171335}
+{"patch":[[[[0,"al t"],[-1,"he decalr"],[0,"\n\n\n "]],2183,2183,17,8]],"time":1449520169335}
+{"patch":[[[[0,"to i"],[-1,"nitial t"],[0,"\n\n\n "]],2175,2175,16,8]],"time":1449520167475}
+{"patch":[[[[0,"ctor to "],[-1,"i"],[0,"\n\n\n     "]],2170,2170,17,16]],"time":1449520165371}
+{"patch":[[[[0,"ructor t"],[-1,"o "],[0,"\n\n\n     "]],2168,2168,18,16]],"time":1449520156509}
+{"patch":[[[[0,"stru"],[-1,"ctor t"],[0,"\n\n\n "]],2166,2166,14,8]],"time":1449520154517}
+{"patch":[[[[0,"se t"],[-1,"he constru"],[0,"\n\n\n "]],2156,2156,18,8]],"time":1449520152425}
+{"patch":[[[[0," // "],[-1,"use t"],[0,"\n\n\n "]],2151,2151,13,8]],"time":1449520150428}
+{"patch":[[[[0,"oints); "],[-1," // "],[0,"\n\n\n     "]],2143,2143,20,16]],"time":1449520144994}
+{"patch":[[[[0,"points);"],[-1," "],[0,"\n\n\n     "]],2142,2142,17,16]],"time":1449520142995}
+{"patch":[[[[0," plane o"],[-1,"bject"],[0,"\n       "]],2069,2069,21,16]],"time":1449520139595}
+{"patch":[[[[0,"lex "],[-1,"plane o"],[0,"\n   "]],2066,2066,15,8]],"time":1449520137586}
+{"patch":[[[[0,"re a com"],[-1,"plex "],[0,"\n       "]],2057,2057,21,16]],"time":1449520135559}
+{"patch":[[[[0,"clare a "],[-1,"com"],[1,"p"],[0,"\n       "]],2054,2054,19,17]],"time":1449520133532}
+{"patch":[[[[0,"clare a "],[-1,"p"],[0,"\n       "]],2054,2054,17,16]],"time":1449520131567}
+{"patch":[[[[0," Dec"],[-1,"lare a "],[0,"\n   "]],2051,2051,15,8]],"time":1449520129531}
+{"patch":[[[[0,"1; // De"],[-1,"c"],[0,"\n       "]],2046,2046,17,16]],"time":1449520127530}
+{"patch":[[[[0,"; //"],[-1," De"],[0,"\n   "]],2047,2047,11,8]],"time":1449520125518}
+{"patch":[[[[0,"plane1; "],[-1,"//"],[0,"\n       "]],2041,2041,18,16]],"time":1449520123515}
+{"patch":[[[[0,"cplane1;"],[-1," "],[0,"\n       "]],2040,2040,17,16]],"time":1449520121522}
+{"patch":[[[[0,"he same "],[-1,"complex"],[0,"\n\n      "]],1976,1976,23,16]],"time":1449519293904}
+{"patch":[[[[0," of "],[-1,"the same "],[0,"\n\n  "]],1971,1971,17,8]],"time":1449519291885}
+{"patch":[[[[0,"imag par"],[-1,"t of "],[0,"\n\n      "]],1962,1962,21,16]],"time":1449519289885}
+{"patch":[[[[0,"he imag "],[-1,"par"],[0,"\n\n      "]],1959,1959,19,16]],"time":1449519287923}
+{"patch":[[[[0,"the "],[-1,"imag "],[0,"\n\n  "]],1958,1958,13,8]],"time":1449519285884}
+{"patch":[[[[0,"); // st"],[-1,"ore the "],[0,"\n\n      "]],1946,1946,24,16]],"time":1449519283892}
+{"patch":[[[[0,"gpart); "],[-1,"// st"],[0,"\n\n      "]],1941,1941,21,16]],"time":1449519281883}
+{"patch":[[[[0,"f a comp"],[-1,"lex"],[0,"\n       "]],1888,1888,19,16],[[[0,"agpart);"],[-1," "],[0,"\n\n      "]],1937,1937,17,16]],"time":1449519279883}
+{"patch":[[[[0,"part"],[-1," of a comp"],[0,"\n   "]],1882,1882,18,8]],"time":1449519277883}
+{"patch":[[[[0,"he r"],[-1,"eal part"],[0,"\n   "]],1874,1874,16,8]],"time":1449519275881}
+{"patch":[[[[0,"ore the "],[-1,"r"],[0,"\n       "]],1869,1869,17,16]],"time":1449519273923}
+{"patch":[[[[0,"/ store "],[-1,"the "],[0,"\n       "]],1865,1865,20,16]],"time":1449519270127}
+{"patch":[[[[0,"part); /"],[-1,"/ store "],[0,"\n       "]],1857,1857,24,16]],"time":1449519268124}
+{"patch":[[[[0,"lpart); "],[-1,"/"],[0,"\n       "]],1856,1856,17,16]],"time":1449519266164}
+{"patch":[[[[0,"alpart);"],[-1," "],[0,"\n       "]],1855,1855,17,16]],"time":1449519246000}
+{"patch":[[[[0,"the sixth argume"],[-1,"nt"],[0,"\n        sscanf("]],1796,1796,34,32]],"time":1449519243994}
+{"patch":[[[[0,"e sixth "],[-1,"argume"],[0,"\n       "]],1798,1798,22,16]],"time":1449519241993}
+{"patch":[[[[0,"he s"],[-1,"ixth "],[0,"\n   "]],1797,1797,13,8]],"time":1449519239991}
+{"patch":[[[[0,"ore the "],[-1,"s"],[0,"\n       "]],1792,1792,17,16]],"time":1449519238032}
+{"patch":[[[[0,"e the fi"],[-1,"f"],[0,"th argum"]],1726,1726,17,16]],"time":1449519206640}
+{"patch":[[[[0," // stor"],[-1,"e the "],[0,"\n       "]],1785,1785,22,16]],"time":1449519200640}
+{"patch":[[[[0,"ints); /"],[-1,"/ stor"],[0,"\n       "]],1779,1779,22,16]],"time":1449519198635}
+{"patch":[[[[0,"oints); "],[-1,"/"],[0,"\n       "]],1778,1778,17,16]],"time":1449519196635}
+{"patch":[[[[0,"points);"],[-1," "],[0,"\n       "]],1777,1777,17,16]],"time":1449519191004}
+{"patch":[[[[0," the fith ar"],[-1,"gument"],[0,"\n        ssc"]],1727,1727,30,24]],"time":1449519186179}
+{"patch":[[[[0,"e fith a"],[-1,"r"],[0,"\n       "]],1730,1730,17,16]],"time":1449519184224}
+{"patch":[[[[0,"e the fi"],[-1,"th a"],[0,"\n       "]],1726,1726,20,16]],"time":1449519182183}
+{"patch":[[[[0,"; // sto"],[-1,"re the fi"],[0,"\n       "]],1717,1717,25,16]],"time":1449519180179}
+{"patch":[[[[0,"oints); "],[-1,"// sto"],[0,"\n       "]],1711,1711,22,16]],"time":1449519178185}
+{"patch":[[[[0,"points);"],[-1," "],[0,"\n       "]],1710,1710,17,16]],"time":1449519176168}
+{"patch":[[[[0,"fourth a"],[-1,"rgument"],[0,"\n       "]],1663,1663,23,16]],"time":1449519174162}
+{"patch":[[[[0,"he f"],[-1,"ourth a"],[0,"\n   "]],1660,1660,15,8]],"time":1449519172163}
+{"patch":[[[[0,"ore the "],[-1,"f"],[0,"\n       "]],1655,1655,17,16]],"time":1449519170201}
+{"patch":[[[[0," // stor"],[-1,"e the "],[0,"\n       "]],1649,1649,22,16]],"time":1449519160415}
+{"patch":[[[[0,"max); //"],[-1," stor"],[0,"\n       "]],1644,1644,21,16]],"time":1449519158414}
+{"patch":[[[[0,"&ymax); "],[-1,"//"],[0,"\n       "]],1642,1642,18,16]],"time":1449519156415}
+{"patch":[[[[0,",&ymax);"],[-1," "],[0,"\n       "]],1641,1641,17,16]],"time":1449519154415}
+{"patch":[[[[0,"e third "],[-1,"argument"],[0,"\n       "]],1596,1596,24,16]],"time":1449519152415}
+{"patch":[[[[0,"ore "],[-1,"the third "],[0,"\n   "]],1590,1590,18,8]],"time":1449519150415}
+{"patch":[[[[0,"&ymin); "],[-1,"// store "],[0,"\n       "]],1577,1577,25,16]],"time":1449519148409}
+{"patch":[[[[0,",&ymin);"],[-1," "],[0,"\n       "]],1576,1576,17,16]],"time":1449519146407}
+{"patch":[[[[0," second argu"],[-1,"ment"],[1,"i"],[0,"\n        ssc"]],1531,1531,28,25]],"time":1449519144408}
+{"patch":[[[[0,"seco"],[-1,"nd argui"],[0,"\n   "]],1532,1532,16,8]],"time":1449519142409}
+{"patch":[[[[0,"re t"],[-1,"he seco"],[0,"\n   "]],1525,1525,15,8]],"time":1449519140431}
+{"patch":[[[[0," // stor"],[-1,"e t"],[0,"\n       "]],1518,1518,19,16]],"time":1449519138387}
+{"patch":[[[[0,"&xmax); "],[-1,"// stor"],[0,"\n       "]],1511,1511,23,16]],"time":1449519136387}
+{"patch":[[[[0,",&xmax);"],[-1," "],[0,"\n       "]],1510,1510,17,16]],"time":1449519134387}
+{"patch":[[[[0,"he first"],[-1," argument"],[0,"\n       "]],1464,1464,25,16]],"time":1449519132384}
+{"patch":[[[[0," the"],[-1," first"],[0,"\n   "]],1462,1462,14,8]],"time":1449519130385}
+{"patch":[[[[0,"/ st"],[-1,"ore the"],[0,"\n   "]],1455,1455,15,8]],"time":1449519128386}
+{"patch":[[[[0,"in); // "],[-1,"s"],[1,"ge"],[0,"t\n      "]],1449,1449,17,18]],"time":1449519126364}
+{"patch":[[[[0,"in); // "],[-1,"ge"],[0,"t\n      "]],1449,1449,18,16]],"time":1449519124362}
+{"patch":[[[[0,"in); // "],[-1,"t"],[0,"\n       "]],1449,1449,17,16]],"time":1449519122362}
+{"patch":[[[[0,"&xmin); "],[-1,"// "],[0,"\n       "]],1446,1446,19,16]],"time":1449519120302}
+{"patch":[[[[0,",&xmin);"],[-1," "],[0,"\n       "]],1445,1445,17,16]],"time":1449519118303}
+{"patch":[[[[0,"rgv[]){\n"],[1,"   "],[0,"\n       "]],1018,1018,16,19]],"time":1449291235362}
+{"patch":[[[[0,"[]){\n   "],[1," "],[0,"\n       "]],1021,1021,16,17]],"time":1449291233365}
+{"patch":[[[[0,"points;\n"],[1,"    "],[0,"\n       "]],1228,1228,16,20]],"time":1449291228066}
+{"patch":[[[[0,"points;\n"],[-1,"    \n"],[0,"        "]],1228,1228,21,16]],"time":1449291226069}
+{"patch":[[[[0,"ng int ypoints;\n"],[1,"   \n"],[0,"        // Varia"]],1220,1220,32,36]],"time":1449291224066}
+{"patch":[[[[0,"nts;\n   "],[1," "],[0,"\n       "]],1231,1231,16,17]],"time":1449291222103}
+{"patch":[[[[0,"e radius"],[1," "],[0,"\n       "]],2356,2356,16,17]],"time":1449291206685}
+{"patch":[[[[0," radius "],[1,"         "],[0,"\n       "]],2357,2357,16,25]],"time":1449291204685}
+{"patch":[[[[0,"us          "],[1," "],[0,"\n           "]],2362,2362,24,25]],"time":1449291202730}
+{"patch":[[[[0,"      }\n"],[-1,"            "],[0,"//printf"]],2640,2640,28,16]],"time":1449291199424}
+{"patch":[[[[0,"    }\n//"],[1,"  "],[0,"printf(\""]],2642,2642,16,18]],"time":1449291166705}
+{"patch":[[[[0,"    }\n//"],[1,"         "],[0,"  printf"]],2642,2642,16,25]],"time":1449291164711}
+{"patch":[[[[0," }\n//           "],[1," "],[0,"printf(\"\\n\");   "]],2645,2645,32,33]],"time":1449291162704}
+{"patch":[[[[0," }\n//           "],[-1," "],[0,"printf(\"\\n\");   "]],2645,2645,33,32]],"time":1449291158410}
+{"patch":[[[[0," }\n//           "],[1," "],[0,"printf(\"\\n\");   "]],2645,2645,32,33]],"time":1449291156455}
+{"patch":[[[[0,"s;x++){\n"],[-1,"                "],[0,"//printf"]],2027,2027,32,16]],"time":1449291154410}
+{"patch":[[[[0,"x++){\n//"],[1,"          "],[0,"printf(\""]],2029,2029,16,26]],"time":1449291126486}
+{"patch":[[[[0,"+){\n//          "],[1,"     "],[0,"printf(\"%Lf %Lf "]],2031,2031,32,37]],"time":1449291124489}
+{"patch":[[[[0,"/               "],[1," "],[0,"printf(\"%Lf %Lf "]],2036,2036,32,33]],"time":1449291122495}
+{"patch":[[[[-1,"/*************************************************************************************************************\n * In here, we work on complex numbers and some arithmetic operations whose  arguments are complex numbers.  * \n * For, we will need to define a data type  named struct complex. In this, any object of type struct comp.   *\n\n * Furthermore, we will be testing the validity of the differengt functions we defined. In order to do that, *\n * we will be comparing some expected values some computed ones, where the computed  values are obtained by  *\n * doing the targeted operationby hands and the computed vales are obtained via the function we build in our *\n * code                                                                                                      *\n *************************************************************************************************************/\n\n#include <stdlib.h>\n#include <stdio.h>\n#include <string.h>\n#include <assert.h>\n#include \"cplane.h\"\n\nint main(int argc, char *argv[]){\n    \n        // Variable for cplane\n        long double xmin;\n        long double xmax;\n        long double ymin;\n        long double ymax;\n        unsigned long int xpoints;\n        unsigned long int ypoints;\n    \n        // Variable for complex number,C\n        COMPLEX compC;\n\n        if(argc!=9){\n            // Not enough parameter\n            return;\n        }\n\n        // Get input from user\n        sscanf(argv[1],\"%Lf\",&xmin);\n        sscanf(argv[2],\"%Lf\",&xmax);\n        sscanf(argv[3],\"%Lf\",&ymin);\n        sscanf(argv[4],\"%Lf\",&ymax);\n        sscanf(argv[5],\"%ld\",&xpoints);\n        sscanf(argv[6],\"%ld\",&ypoints);\n        sscanf(argv[7],\"%Lf\",&compC.x_realpart);\n        sscanf(argv[8],\"%Lf\",&compC.y_imagpart);\n\n        // Create complex plane\n        CPLANE cplane1;\n        cplane1 = init_cplane(xmin,xmax,ymin,ymax,xpoints,ypoints);\n\n\n        // Interate over complex plane\n        int out;\n        int x,y;\n        for(y=0;y<cplane1.ypoints;y++){\n            for(x=0;x<cplane1.xpoints;x++){\n//                printf(\"%Lf %Lf \\n\",cplane1.mat[y][x].x_realpart,cplane1.mat[y][x].y_imagpart);\n\n                // Calculate Julia set\n                COMPLEX tmp = cplane1.mat[y][x];\n                for(out=0;out<1000;out++){\n                    tmp = juliamap(&tmp,&compC);\n                    // Check if outside the radius           \n                    long double rad = tmp.x_realpart*tmp.x_realpart + tmp.y_imagpart*tmp.y_imagpart;\n                    if(rad>4) break;\n                }\n                printf(\"%Lf %Lf %d\\n\",cplane1.mat[y][x].x_realpart,cplane1.mat[y][x].y_imagpart,out);\n            }\n//            printf(\"\\n\");   // Added for gnuplot\n        }\n        return 0;\n}\n\n"]],0,0,2730,0]],"time":1449290905028}

@@ -11,13 +11,13 @@ CPLANE init_cplane(long double xmin,long double xmax,long double ymin,long doubl
     // Check bound
     if(xmin >= xmax || ymin >= ymax){
         printf("Bound error.\n");
-        return;
+        //return;
     }
 
-    // Check number of points 
+    // Check number of points
     if(xpoints<1 || ypoints<1){
         printf("Point number error.\n");
-        return;
+        //return;
     }
 
 
@@ -53,4 +53,23 @@ CPLANE init_cplane(long double xmin,long double xmax,long double ymin,long doubl
     }
 
     return cplanex;
+}
+
+// Print a compelx plane
+void print_cplane(CPLANE aplane){
+    int x;
+    int y;
+
+    for(y = 0; y < (aplane.ypoints); ++y){
+        for( x = 0; x < (aplane.xpoints); ++x){
+            printf("%Lf %Lf", aplane.mat[y][x].x_realpart, aplane.mat[y][x].y_imagpart);
+        }
+        puts("\n");
+    }
+    puts("\n");
+}
+
+// Release the space we borrow from the dynamic allocation
+void release_space(CPLANE aplane){
+    free(aplane.mat);
 }

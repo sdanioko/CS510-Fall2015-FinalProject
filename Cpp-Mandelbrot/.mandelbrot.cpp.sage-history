@@ -1,0 +1,176 @@
+"/**************************************************************************\nThis file contains the implimentation of the Mandelrbot set via finding   *\nset of values c in the complex plane for which the orbit of 0 under the   *\niteration of the complex uadratic polynomial                              *\nz(n+1) = z(n)^2 + c                                                       *\n***************************************************************************/\n\n#include <iostream>\n#include <complex>\n#include <cstdio>\n#include <boost/numeric/ublas/matrix.hpp>\n#include <boost/numeric/ublas/io.hpp>\n\n#include \"julia.h\"\n#include \"cplane.hpp\"\n\nint main(int argc,char *argv[]){\n\n        // Variable for cplane\n        long double xmin;\n        long double xmax;\n        long double ymin;\n        long double ymax;\n        unsigned long int xpoints;\n        unsigned long int ypoints;\n\n\tif(argc!=7){\n\t\treturn 0;\n\t}\n\n\tboost::numeric::ublas::matrix< std::complex<long double> > test2;\n\n        // Get input from user\n\tstd::stringstream(argv[1]) >> xmin;\n\tstd::stringstream(argv[2]) >> xmax;\n\tstd::stringstream(argv[3]) >> ymin;\n\tstd::stringstream(argv[4]) >> ymax;\n\tstd::stringstream(argv[5]) >> xpoints;\n\tstd::stringstream(argv[6]) >> ypoints;\n\n\t// Create cplane instance\n\tcplane cplane1;\n\tcplane1.set(xmin,xmax,ymin,ymax,xpoints,ypoints);\n\n\tlcomplex compC (0,0); // Initialize the entries\n\tint out;\n\tfor(int y =0;y<cplane1.ypoints;y++){\n\t\tfor(int x =0;x<cplane1.xpoints;x++){\n\t\t\tlcomplex tmp = cplane1.mat(x,y);\n\t\t\tfor(out=0;out<1000;out++){\n\t\t\t\tif(std::abs(tmp)>2.0)break; // to avoid an infinity loop\n\t\t\t\ttmp = juliamap(tmp,cplane1.mat(x,y));\n\t\t\t}\n\t\t\t// Print out data\n\t\t\tstd::cout << cplane1.mat(x,y).real() << \" \" << cplane1.mat(x,y).imag() << \" \" << out << std::endl;\n\t\t}\n     //\t\tstd::cout << std::endl;\n\t}\n    cplane1.mat.clear(); // This releases the memory\n}\n"
+{"patch":[[[[0," release"],[-1,"s"],[0," the mem"]],1837,1837,17,16]],"time":1450237176046}
+{"patch":[[[[0," mem"],[-1,"ory"],[0,"\n}\n"]],1849,1849,10,7]],"time":1450235798094}
+{"patch":[[[[0,"the "],[-1,"mem"],[1,"bo"],[0,"\n}\n"]],1846,1846,10,9]],"time":1450235796099}
+{"patch":[[[[0,"ase the "],[-1,"bo"],[0,"\n}\n"]],1842,1842,13,11]],"time":1450235794097}
+{"patch":[[[[0,"ase the "],[1,"a"],[0,"\n}\n"]],1842,1842,11,12]],"time":1450235792093}
+{"patch":[[[[0,"se the a"],[1,"l"],[0,"\n}\n"]],1843,1843,11,12]],"time":1450235790091}
+{"patch":[[[[0,"ase the "],[-1,"al"],[1,"s"],[0,"\n}\n"]],1842,1842,13,12]],"time":1450235788096}
+{"patch":[[[[0,"ase "],[-1,"the s"],[0,"\n}\n"]],1842,1842,12,7]],"time":1450235786094}
+{"patch":[[[[0,"is r"],[-1,"elease "],[0,"\n}\n"]],1835,1835,14,7]],"time":1450235784107}
+{"patch":[[[[0,"/ Th"],[-1,"is r"],[0,"\n}\n"]],1831,1831,11,7]],"time":1450235782094}
+{"patch":[[[[0,"r();"],[-1," // Th"],[0,"\n}\n"]],1825,1825,13,7]],"time":1450235780092}
+{"patch":[[[[0,".clear()"],[-1,";"],[0,"\n}\n"]],1820,1820,12,11]],"time":1450235778092}
+{"patch":[[[[0,"at.c"],[-1,"lear()"],[0,"\n}\n"]],1818,1818,13,7]],"time":1450235775471}
+{"patch":[[[[0,".mat"],[-1,".c"],[0,"\n}\n"]],1816,1816,9,7]],"time":1450235773507}
+{"patch":[[[[0," cplane1"],[-1,".mat"],[0,"\n}\n"]],1808,1808,15,11]],"time":1450235771468}
+{"patch":[[[[0,"\t}\n    c"],[-1,"plane1"],[0,"\n}\n"]],1802,1802,17,11]],"time":1450235769469}
+{"patch":[[[[0,"\n\t}\n"],[-1,"    c"],[0,"\n}\n"]],1801,1801,12,7]],"time":1450235767465}
+{"patch":[[[[0,"::endl;\n"],[1,"\n"],[0,"\t}\n\n}\n"]],1794,1794,14,15]],"time":1450235755132}
+{"patch":[[[[0,"::endl;\n"],[1,"       "],[0,"\n\t}\n\n}\n"]],1794,1794,15,22]],"time":1450235753123}
+{"patch":[[[[0,"\n       "],[1," "],[0,"\n\t}\n\n}\n"]],1801,1801,15,16]],"time":1450235751122}
+{"patch":[[[[0,"dl;\n"],[-1,"        \n"],[0,"\t}\n\n"]],1798,1798,17,8]],"time":1450235748488}
+{"patch":[[[[0,"********"],[-1,"*******"],[0,"\nThis fi"]],60,60,23,16]],"time":1450225807808}
+{"patch":[[[[0,"********"],[-1,"********"],[0,"\nThis fi"]],52,52,24,16]],"time":1450225805807}
+{"patch":[[[[0,"nding   "],[-1,"*"],[0,"\nset of "]],127,127,17,16]],"time":1450225801805}
+{"patch":[[[[0," finding"],[-1,"   "],[0,"\nset of "]],124,124,19,16]],"time":1450225797691}
+{"patch":[[[[0,"r the   "],[-1,"*"],[0,"\niterati"]],199,199,17,16]],"time":1450225795695}
+{"patch":[[[[0,"der the "],[-1,"  "],[0,"\niterati"]],197,197,18,16]],"time":1450225793691}
+{"patch":[[[[0,"nder the"],[-1," "],[0,"\niterati"]],196,196,17,16]],"time":1450225791680}
+{"patch":[[[[0,"        "],[-1,"*"],[1," "],[0,"\nz(n+1) "]],271,271,17,17]],"time":1450225788872}
+{"patch":[[[[0,"ial "],[-1,"                              "],[0,"\nz(n"]],246,246,38,8]],"time":1450225782906}
+{"patch":[[[[0,"lynomial"],[-1," "],[0,"\nz(n+1) "]],241,241,17,16]],"time":1450225780869}
+{"patch":[[[[0,"        "],[-1,"*"],[0,"\n*******"]],316,316,17,16]],"time":1450225777296}
+{"patch":[[[[0,"        "],[1," *"],[0,"\n*******"]],316,316,16,18]],"time":1450225771322}
+{"patch":[[[[0,"        "],[-1,"*"],[0,"\n*******"]],317,317,17,16]],"time":1450225769318}
+{"patch":[[[[0,"        "],[-1," "],[0,"\n*******"]],316,316,17,16]],"time":1450225766630}
+{"patch":[[[[0,"        "],[-1,"        "],[0,"\n*******"]],308,308,24,16]],"time":1450225764591}
+{"patch":[[[[0,"+ c "],[-1,"                                              "],[0,"\n***"]],266,266,54,8]],"time":1450225762630}
+{"patch":[[[[0,"n)^2 + c"],[-1," "],[0,"\n*******"]],261,261,17,16]],"time":1450225760579}
+{"patch":[[[[0,"+ c\n"],[-1,"*******************************************"],[0,"****"]],266,266,51,8]],"time":1450225757325}
+{"patch":[[[[0,"+ c\n"],[-1,"******************************"],[0,"**/\n"]],266,266,38,8]],"time":1450225755326}
+{"patch":[[[[0,")^2 + c\n"],[-1,"*"],[0,"*/\n\n#inc"]],262,262,17,16]],"time":1450225753283}
+{"patch":[[[[0,"nder the"],[-1,"\n"],[1," "],[0,"iteratio"]],196,196,17,17]],"time":1450225748510}
+{"patch":[[[[0,"he orbit"],[-1," "],[0,"of 0 und"]],181,181,17,16]],"time":1450225746192}
+{"patch":[[[[0,"he orbit"],[1,"\n"],[0,"of 0 und"]],181,181,16,17]],"time":1450225744231}
+{"patch":[[[[0,"finding\n"],[1,"\nIt is the"],[0,"set of v"]],125,125,16,26]],"time":1450225741038}
+{"patch":[[[[0,"t is the"],[1," "],[0,"set of v"]],135,135,16,17]],"time":1450225739038}
+{"patch":[[[[0,"via "],[-1,"finding"],[0,"\n\nIt"]],121,121,15,8]],"time":1450225731361}
+{"patch":[[[[0," set"],[-1," via "],[0,"\n\nIt"]],116,116,13,8]],"time":1450225729361}
+{"patch":[[[[0,"rbot set"],[1,",\n"],[0,"\n\nIt is "]],112,112,16,18]],"time":1450225727399}
+{"patch":[[[[0,"ot set,\n"],[1,"which is defined to be the set of complex numbers"],[0,"\n\nIt is "]],114,114,16,65]],"time":1450225725370}
+{"patch":[[[[0," numbers"],[1," c for which\nthe sequence c,"],[0,"\n\nIt is "]],163,163,16,44]],"time":1450225723358}
+{"patch":[[[[0,"uence c,"],[1," c^2, c^2+c, (c^2 +c)^2 does not go infinity"],[0,"\n\nIt is "]],191,191,16,60]],"time":1450225721357}
+{"patch":[[[[0,"infinity"],[1,"."],[0,"\n\nIt is "]],235,235,16,17]],"time":1450225719395}
+{"patch":[[[[0," the imp"],[1,"p"],[0,"limentat"]],79,79,16,17]],"time":1450225716023}
+{"patch":[[[[0,")^2 "],[-1,"+ c"],[0,"\n*/\n"]],386,386,11,8]],"time":1450225708210}
+{"patch":[[[[0,"= z("],[-1,"n)^2 "],[1,")"],[0,"\n*/\n"]],381,381,13,9]],"time":1450225706211}
+{"patch":[[[[0,"+1) "],[-1,"= z()"],[0,"\n*/\n"]],377,377,13,8]],"time":1450225704212}
+{"patch":[[[[0,"l\nz("],[-1,"n+1) "],[1,")"],[0,"\n*/\n"]],372,372,13,9]],"time":1450225702214}
+{"patch":[[[[0,"ial\n"],[-1,"z()"],[0,"\n*/\n"]],370,370,11,8]],"time":1450225700213}
+{"patch":[[[[0,"ynomial\n"],[-1,"\n"],[0,"*/\n\n#inc"]],366,366,17,16]],"time":1450225698208}
+{"patch":[[[[0,"polynomi"],[-1,"al"],[0,"\n*/\n\n#in"]],363,363,18,16]],"time":1450225696046}
+{"patch":[[[[0,"ic p"],[-1,"olynomi"],[0,"\n*/\n"]],360,360,15,8]],"time":1450225694006}
+{"patch":[[[[0,"adratic "],[-1,"p"],[0,"\n*/\n\n#in"]],355,355,17,16]],"time":1450225692043}
+{"patch":[[[[0,"adra"],[-1,"tic "],[0,"\n*/\n"]],355,355,12,8]],"time":1450225687007}
+{"patch":[[[[0,"mple"],[-1,"x uadra"],[0,"\n*/\n"]],348,348,15,8]],"time":1450225685007}
+{"patch":[[[[0,"on o"],[-1,"f the comple"],[0,"\n*/\n"]],336,336,20,8]],"time":1450225683047}
+{"patch":[[[[0,"eration "],[-1,"o"],[0,"\n*/\n\n#in"]],331,331,17,16]],"time":1450225681046}
+{"patch":[[[[0,"teration"],[-1," "],[0,"\n*/\n\n#in"]],330,330,17,16]],"time":1450225676146}
+{"patch":[[[[0,"the "],[-1,"iteration"],[0,"\n*/\n"]],325,325,17,8]],"time":1450225674145}
+{"patch":[[[[0," 0 u"],[-1,"nder the "],[0,"\n*/\n"]],316,316,17,8]],"time":1450225672145}
+{"patch":[[[[0,"it\nof 0 "],[-1,"u"],[0,"\n*/\n\n#in"]],311,311,17,16]],"time":1450225670187}
+{"patch":[[[[0,"\nof "],[-1,"0 "],[0,"\n*/\n"]],313,313,10,8]],"time":1450225654951}
+{"patch":[[[[0,"orbi"],[-1,"t\nof "],[0,"\n*/\n"]],308,308,13,8]],"time":1450225652950}
+{"patch":[[[[0," the orb"],[-1,"i"],[1,"o"],[0,"\n*/\n\n#in"]],303,303,17,17]],"time":1450225650950}
+{"patch":[[[[0,"ch t"],[-1,"he orbo"],[0,"\n*/\n"]],301,301,15,8]],"time":1450225648947}
+{"patch":[[[[0,"r which "],[-1,"t"],[0,"\n*/\n\n#in"]],296,296,17,16]],"time":1450225646975}
+{"patch":[[[[0,"ne for w"],[-1,"hich "],[0,"\n*/\n\n#in"]],291,291,21,16]],"time":1450225637073}
+{"patch":[[[[0,"ex p"],[-1,"lane for w"],[0,"\n*/\n"]],285,285,18,8]],"time":1450225635072}
+{"patch":[[[[0,"complex "],[-1,"p"],[0,"\n*/\n\n#in"]],280,280,17,16]],"time":1450225633111}
+{"patch":[[[[0,"in the c"],[-1,"omplex "],[0,"\n*/\n\n#in"]],273,273,23,16]],"time":1450225619441}
+{"patch":[[[[0," c i"],[-1,"n the c"],[0,"\n*/\n"]],270,270,15,8]],"time":1450225617445}
+{"patch":[[[[0,"alues c "],[-1,"i"],[0,"\n*/\n\n#in"]],265,265,17,16]],"time":1450225615482}
+{"patch":[[[[0," val"],[-1,"ues c "],[0,"\n*/\n"]],263,263,14,8]],"time":1450225602765}
+{"patch":[[[[0,"et o"],[-1,"f val"],[0,"\n*/\n"]],258,258,13,8]],"time":1450225600794}
+{"patch":[[[[0,"the set "],[-1,"o"],[0,"\n*/\n\n#in"]],253,253,17,16]],"time":1450225598791}
+{"patch":[[[[0," is the "],[-1,"set "],[0,"\n*/\n\n#in"]],249,249,20,16]],"time":1450225591856}
+{"patch":[[[[0,".\n\nIt is"],[-1," the "],[0,"\n*/\n\n#in"]],244,244,21,16]],"time":1450225589854}
+{"patch":[[[[0,"y.\n\n"],[-1,"It is\n"],[0,"*/\n\n"]],243,243,14,8]],"time":1450225587841}
+{"patch":[[[[0,"inity.\n\n"],[1,"It is the value of c\n"],[0,"*/\n\n#inc"]],239,239,16,37]],"time":1450225585830}
+{"patch":[[[[0,"lue of c"],[1," "],[0,"\n*/\n\n#in"]],259,259,16,17]],"time":1450225583867}
+{"patch":[[[[0," val"],[-1,"ue of c "],[0,"\n*/\n"]],256,256,16,8]],"time":1450225569516}
+{"patch":[[[[0,"the "],[-1,"val"],[0,"\n*/\n"]],253,253,11,8]],"time":1450225567550}
+{"patch":[[[[0,"\nIt "],[-1,"is the "],[0,"\n*/\n"]],246,246,15,8]],"time":1450225565513}
+{"patch":[[[[0,"y.\n\n"],[-1,"It "],[0,"\n*/\n"]],243,243,11,8]],"time":1450225563550}
+{"patch":[[[[0,"inity.\n\n"],[-1,"\n"],[0,"*/\n\n#inc"]],239,239,17,16]],"time":1450225561519}
+{"patch":[[[[0,"finity.\n"],[-1,"\n"],[0,"*/\n\n#inc"]],238,238,17,16]],"time":1450225558827}
+{"patch":[[[[0,"infinity"],[-1,"."],[0,"\n*/\n\n#in"]],236,236,17,16]],"time":1450225524779}
+{"patch":[[[[0,"not go i"],[-1,"nfinity"],[0,"\n*/\n\n#in"]],229,229,23,16]],"time":1450225522743}
+{"patch":[[[[0,"not "],[-1,"go i"],[0,"\n*/\n"]],229,229,12,8]],"time":1450225520779}
+{"patch":[[[[0,"does"],[-1," not "],[0,"\n*/\n"]],224,224,13,8]],"time":1450225518741}
+{"patch":[[[[0,"+c)^"],[-1,"2 does"],[0,"\n*/\n"]],218,218,14,8]],"time":1450225516779}
+{"patch":[[[[0,"(c^2 +c)"],[-1,"^"],[0,"\n*/\n\n#in"]],213,213,17,16]],"time":1450225514779}
+{"patch":[[[[0,"c, (c^2 "],[-1,"+c"],[1,"="],[0,")\n*/\n\n#i"]],210,210,18,17]],"time":1450225512571}
+{"patch":[[[[0,", (c"],[-1,"^2 ="],[0,")\n*/"]],211,211,12,8]],"time":1450225510620}
+{"patch":[[[[0,"c^2+c, ("],[-1,"c"],[0,")\n*/\n\n#i"]],206,206,17,16]],"time":1450225508568}
+{"patch":[[[[0," c^2+c, "],[-1,"()"],[0,"\n*/\n\n#in"]],205,205,18,16]],"time":1450225506607}
+{"patch":[[[[0," c^2"],[-1,"+c, "],[0,"\n*/\n"]],205,205,12,8]],"time":1450225499057}
+{"patch":[[[[0,", c^2, c"],[-1,"^2"],[0,"\n*/\n\n#in"]],199,199,18,16]],"time":1450225497091}
+{"patch":[[[[0,"c, c^2, "],[-1,"c"],[0,"\n*/\n\n#in"]],198,198,17,16]],"time":1450225495087}
+{"patch":[[[[0,"e c, c^2"],[-1,", "],[0,"\n*/\n\n#in"]],196,196,18,16]],"time":1450225486409}
+{"patch":[[[[0,"c, c"],[-1,"^2"],[0,"\n*/\n"]],198,198,10,8]],"time":1450225484408}
+{"patch":[[[[0,"quen"],[-1,"ce c, c"],[0,"\n*/\n"]],191,191,15,8]],"time":1450225480406}
+{"patch":[[[[0,"ch\nt"],[-1,"he sequen"],[0,"\n*/\n"]],182,182,17,8]],"time":1450225478409}
+{"patch":[[[[0,"r which\n"],[-1,"t"],[0,"\n*/\n\n#in"]],177,177,17,16]],"time":1450225476444}
+{"patch":[[[[0,"r wh"],[-1,"ich\n"],[0,"\n*/\n"]],177,177,12,8]],"time":1450225427219}
+{"patch":[[[[0,"s c "],[-1,"for wh"],[0,"\n*/\n"]],171,171,14,8]],"time":1450225425217}
+{"patch":[[[[0,"umbers c"],[-1," "],[0,"\n*/\n\n#in"]],166,166,17,16]],"time":1450225423254}
+{"patch":[[[[0," numbers"],[-1," c"],[0,"\n*/\n\n#in"]],164,164,18,16]],"time":1450225417620}
+{"patch":[[[[0,"lex "],[-1,"numbers"],[0,"\n*/\n"]],161,161,15,8]],"time":1450225415618}
+{"patch":[[[[0,"et of co"],[-1,"mplex "],[0,"\n*/\n\n#in"]],151,151,22,16]],"time":1450225398256}
+{"patch":[[[[0,"the "],[-1,"set of co"],[0,"\n*/\n"]],146,146,17,8]],"time":1450225396251}
+{"patch":[[[[0,"ined"],[-1," to be the "],[0,"\n*/\n"]],135,135,19,8]],"time":1450225394227}
+{"patch":[[[[0," is defi"],[-1,"ned"],[0,"\n*/\n\n#in"]],128,128,19,16]],"time":1450225392219}
+{"patch":[[[[0," is "],[-1,"defi"],[1,"a"],[0,"\n*/\n"]],128,128,12,9]],"time":1450225390224}
+{"patch":[[[[0,"ich is a"],[1," "],[0,"\n*/\n\n#in"]],125,125,16,17]],"time":1450225388256}
+{"patch":[[[[0,"whic"],[-1,"h is a "],[0,"\n*/\n"]],123,123,15,8]],"time":1450225377613}
+{"patch":[[[[0,"et,\n"],[-1,"whic\n"],[0,"*/\n\n"]],119,119,13,8]],"time":1450225375651}
+{"patch":[[[[0,"rbot set"],[-1,","],[0,"\n*/\n\n#in"]],113,113,17,16]],"time":1450225373609}
+{"patch":[[[[0,"rbot set"],[1,"."],[0,"\n*/\n\n#in"]],113,113,16,17]],"time":1450225371199}
+{"patch":[[[[0,"bot "],[-1,"set."],[0,"\n*/\n"]],114,114,12,8]],"time":1450225351186}
+{"patch":[[[[0,"ndelrbot"],[-1," "],[0,"\n*/\n\n#in"]],109,109,17,16]],"time":1450225349149}
+{"patch":[[[[0,"ande"],[-1,"lrbot"],[0,"\n*/\n"]],108,108,13,8]],"time":1450225346807}
+{"patch":[[[[0,"the "],[-1,"Mande"],[0,"\n*/\n"]],103,103,13,8]],"time":1450225344771}
+{"patch":[[[[0,"tion"],[-1," of the "],[0,"\n*/\n"]],95,95,16,8]],"time":1450225342811}
+{"patch":[[[[0,"impp"],[-1,"limentation"],[0,"\n*/\n"]],84,84,19,8]],"time":1450225340769}
+{"patch":[[[[0,"he i"],[-1,"mpp"],[0,"\n*/\n"]],81,81,11,8]],"time":1450225338803}
+{"patch":[[[[0," con"],[-1,"tains the i"],[0,"\n*/\n"]],70,70,19,8]],"time":1450225336750}
+{"patch":[[[[0,"is f"],[-1,"ile con"],[0,"\n*/\n"]],63,63,15,8]],"time":1450225334790}
+{"patch":[[[[0,"**\nThis "],[-1,"f"],[0,"\n*/\n\n#in"]],58,58,17,16]],"time":1450225332750}
+{"patch":[[[[0,"***\nThis"],[-1," "],[0,"\n*/\n\n#in"]],57,57,17,16]],"time":1450225326077}
+{"patch":[[[[0,"**\nT"],[-1,"his"],[0,"\n*/\n"]],58,58,11,8]],"time":1450225324074}
+{"patch":[[[[0,"***\n"],[-1,"T"],[0,"\n*/\n"]],57,57,9,8]],"time":1450225322111}
+{"patch":[[[[0,"********"],[-1,"***********"],[0,"\n\n*/\n\n#i"]],41,41,27,16]],"time":1450225315378}
+{"patch":[[[[0,"/**"],[-1,"**********************************************"],[0,"\n\n*/"]],0,0,53,7]],"time":1450225313341}
+{"patch":[[[[0,"/*"],[-1,"*"],[0,"\n\n*/\n\n#i"]],0,0,11,10]],"time":1450225311368}
+{"patch":[[[[0,"/*\n\n"],[-1,"*/\n"],[0,"\n#in"]],0,0,11,8]],"time":1450225306279}
+{"patch":[[[[0,"/"],[-1,"*\n"],[0,"\n\n#i"]],0,0,7,5]],"time":1450225304276}
+{"patch":[[[[-1,"/"],[0,"\n\n#inclu"]],0,0,9,8]],"time":1450225302265}
+{"patch":[[[[-1,"\n"],[0,"\n#include <iostr"]],0,0,17,16]],"time":1450225300263}
+{"patch":[[[[-1,"\n"],[0,"#include <iostre"]],0,0,17,16]],"time":1450225298267}
+{"patch":[[[[-1,"#include <iostream>\n#include <complex>\n#include <cstdio>\n#include <boost/numeric/ublas/matrix.hpp>\n#include <boost/numeric/ublas/io.hpp>\n\n#include \"julia.h\"\n#include \"cplane.hpp\"\n\nint main(int argc,char *argv[]){\n\n        // Variable for cplane\n        long double xmin;\n        long double xmax;\n        long double ymin;\n        long double ymax;\n        unsigned long int xpoints;\n        unsigned long int ypoints;\n\n\tif(argc!=7){\n\t\treturn 0;\n\t}\n\n\tboost::numeric::ublas::matrix< std::complex<long double> > test2;\n\n        // Get input from user\n\tstd::stringstream(argv[1]) >> xmin;\n\tstd::stringstream(argv[2]) >> xmax;\n\tstd::stringstream(argv[3]) >> ymin;\n\tstd::stringstream(argv[4]) >> ymax;\n\tstd::stringstream(argv[5]) >> xpoints;\n\tstd::stringstream(argv[6]) >> ypoints;\n\n\t// Create cplane instance\n\tcplane cplane1;\n\tcplane1.set(xmin,xmax,ymin,ymax,xpoints,ypoints);\n\n\tlcomplex compC (0,0); // Initialize the entries\n\tint out;\n\tfor(int y =0;y<cplane1.ypoints;y++){\n\t\tfor(int x =0;x<cplane1.xpoints;x++){\n\t\t\tlcomplex tmp = cplane1.mat(x,y);\n\t\t\tfor(out=0;out<1000;out++){\n\t\t\t\tif(std::abs(tmp)>2.0)break; // to avoid an infinity loop\n\t\t\t\ttmp = juliamap(tmp,cplane1.mat(x,y));\n\t\t\t}\n\t\t\t// Print out data\n\t\t\tstd::cout << cplane1.mat(x,y).real() << \" \" << cplane1.mat(x,y).imag() << \" \" << out << std::endl;\n\t\t}\n     //\t\tstd::cout << std::endl;\n\t}\n\n}\n"]],0,0,1350,0]],"time":1450225146757}
+{"patch":[[[[1,"-"]],0,0,0,1]],"time":1450225009754}
+{"patch":[[[[-1,"-"],[1,"#include <iostream>\n#include <complex>\n#include <cstdio>\n#include <boost/numeric/ublas/matrix.hpp>\n#include <boost/numeric/ublas/io.hpp>\n\n#include \"julia.h\"\n#include \"cplane.hpp\"\n\nint main(int argc,char *argv[]){\n\n        // Variable for cplane\n        long double xmin;\n        long double xmax;\n        long double ymin;\n        long double ymax;\n        unsigned long int xpoints;\n        unsigned long int ypoints;\n\n\tif(argc!=7){\n\t\treturn 0;\n\t}\n\n\tboost::numeric::ublas::matrix< std::complex<long double> > test2;\n\n        // Get input from user\n\tstd::stringstream(argv[1]) >> xmin;\n\tstd::stringstream(argv[2]) >> xmax;\n\tstd::stringstream(argv[3]) >> ymin;\n\tstd::stringstream(argv[4]) >> ymax;\n\tstd::stringstream(argv[5]) >> xpoints;\n\tstd::stringstream(argv[6]) >> ypoints;\n\n\t// Create cplane instance\n\tcplane cplane1;\n\tcplane1.set(xmin,xmax,ymin,ymax,xpoints,ypoints);\n\n\tlcomplex compC (0,0); // Initialize the entries\n\tint out;\n\tfor(int y =0;y<cplane1.ypoints;y++){\n\t\tfor(int x =0;x<cplane1.xpoints;x++){\n\t\t\tlcomplex tmp = cplane1.mat(x,y);\n\t\t\tfor(out=0;out<1000;out++){\n\t\t\t\tif(std::abs(tmp)>2.0)break; // to avoid an infinity loop\n\t\t\t\ttmp = juliamap(tmp,cplane1.mat(x,y));\n\t\t\t}\n\t\t\t// Print out data\n\t\t\tstd::cout << cplane1.mat(x,y).real() << \" \" << cplane1.mat(x,y).imag() << \" \" << out << std::endl;\n\t\t}\n     //\t\tstd::cout << std::endl;\n\t}\n\n}\n"]],0,0,1,1350]],"time":1450225000275}
+{"patch":[[[[0,"entr"],[-1,"ies"],[0,"\n\tin"]],915,915,11,8]],"time":1450218493021}
+{"patch":[[[[0,"ze t"],[-1,"he entr"],[0,"\n\tin"]],908,908,15,8]],"time":1450218491024}
+{"patch":[[[[0,"iali"],[-1,"ze t"],[0,"\n\tin"]],904,904,12,8]],"time":1450218489019}
+{"patch":[[[[0," Ini"],[-1,"tiali"],[0,"\n\tin"]],899,899,13,8]],"time":1450218487017}
+{"patch":[[[[0,"; //"],[-1," Ini"],[0,"\n\tin"]],895,895,12,8]],"time":1450218485019}
+{"patch":[[[[0," (0,0); "],[-1,"//"],[0,"\n\tint ou"]],889,889,18,16]],"time":1450218483018}
+{"patch":[[[[0,"C (0,0);"],[-1," "],[0,"\n\tint ou"]],888,888,17,16]],"time":1450218481014}
+{"patch":[[[[0,"ity "],[-1,"loop"],[0,"\n\t\t\t"]],1102,1102,12,8]],"time":1450218463933}
+{"patch":[[[[0," an "],[-1,"infinity "],[0,"\n\t\t\t"]],1093,1093,17,8]],"time":1450218461935}
+{"patch":[[[[0,"oid "],[-1,"an "],[0,"\n\t\t\t"]],1090,1090,11,8]],"time":1450218459930}
+{"patch":[[[[0,"to a"],[-1,"void "],[0,"\n\t\t\t"]],1085,1085,13,8]],"time":1450218457932}
+{"patch":[[[[0,"; // to "],[-1,"a"],[0,"\n\t\t\t\ttmp"]],1080,1080,17,16]],"time":1450218455931}
+{"patch":[[[[0,"; // to "],[1,"be able to get out the"],[0,"\n\t\t\t\ttmp"]],1080,1080,16,38]],"time":1450218453207}
+{"patch":[[[[0,"et o"],[-1,"ut the"],[0,"\n\t\t\t"]],1100,1100,14,8]],"time":1450218449197}
+{"patch":[[[[0,"le t"],[-1,"o get o"],[0,"\n\t\t\t"]],1093,1093,15,8]],"time":1450218447200}
+{"patch":[[[[0,"be able "],[-1,"t"],[0,"\n\t\t\t\ttmp"]],1088,1088,17,16]],"time":1450218445196}
+{"patch":[[[[0,"to be ab"],[-1,"le "],[1,"ke"],[0,"\n\t\t\t\ttmp"]],1085,1085,19,18]],"time":1450218443195}
+{"patch":[[[[0,"// t"],[-1,"o be abke"],[0,"\n\t\t\t"]],1082,1082,17,8]],"time":1450218441195}
+{"patch":[[[[0,"eak; // "],[-1,"t"],[0,"\n\t\t\t\ttmp"]],1077,1077,17,16]],"time":1450218439230}
+{"patch":[[[[0,"0)break;"],[-1," // "],[0,"\n\t\t\t\ttmp"]],1073,1073,20,16]],"time":1450218418724}
+{"patch":[[[[0,"dl;\n\t\t}\n"],[-1,"    "],[0," //\t\tstd"]],1248,1248,20,16]],"time":1449200354825}
+{"patch":[[[[0,"dl;\n\t\t}\n"],[-1," "],[0,"//\t\tstd:"]],1248,1248,17,16]],"time":1449200346019}

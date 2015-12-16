@@ -1,4 +1,8 @@
-mport matplotlib as mpl
+# This file will be used to better visualize our data file. Plus, it will allow us
+# zoom on different parts of the JSets and those of of the frontieres of the MSets.
+
+
+import matplotlib as mpl
 mpl.use('Agg')  # Disable X server
 import matplotlib.pyplot as pyplot
 from matplotlib import cm
@@ -8,13 +12,15 @@ import sys
 
 if len(sys.argv)!=2:
     print "Input error"
-    sys.exit()
+    sys.exit() # Throw an exception
 
-csvfile = sys.argv[1]
+csvfile = sys.argv[1] # An automatic list of strings representing the arguments on the command-line
+# while take the name of the file as the first argument
+
 
 if ".csv" not in csvfile:
     print "File type error"
-    sys.exit()
+    sys.exit() # Throw an exception. 
 
 print csvfile
 
@@ -24,17 +30,17 @@ print fname
 # Read csvfile
 df = pd.read_csv(csvfile,sep=' ',names=list('xyz'))
 
-# Fcking hack for retarded graph
-data = df.pivot('y','x','z')
-pyplot.xlabel('X')
-pyplot.ylabel('Y')
-xval,yval = data.columns.values,data.index.values
-xt = [xval[0],xval[-1]]
-yt = [yval[0],yval[-1]]
-pyplot.xticks([0,len(xval)-1],xt)
-pyplot.yticks([0,len(yval)-1],yt)
+# Plot the graph
 
-pyplot.imshow(np.log(data.values))
-pyplot.gca().invert_yaxis()
-pyplot.savefig(fname,dpi=500)
+data = df.pivot('y','x','z')
+pyplot.xlabel('X') # label the x axis with X
+pyplot.ylabel('Y') # label the y axis with Y
+xval,yval = data.columns.values,data.index.values # set xval and yval
+xt = [xval[0],xval[-1]] # set xt
+yt = [yval[0],yval[-1]] # set yt
+pyplot.xticks([0,len(xval)-1],xt)  # specify a rotation for the tick labels 
+pyplot.yticks([0,len(yval)-1],yt)  # You can specify a rotation for the tick labels
+pyplot.imshow(np.log(data.values)) # display the image by using matplotlib.pyplot using imshow() 
+pyplot.gca().invert_yaxis() # get the y axis and invert it
+pyplot.savefig(fname,dpi=500) # save the figure
 

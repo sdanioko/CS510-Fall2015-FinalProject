@@ -1,0 +1,1 @@
+"all : test_complexplane\n\ntest_complex: newcomplex3.o\ntest_complex: cplane.o\n\nrun :\n\t./test_complexplane\n\nclean:\n\t rm -f  test_complexplane  test_complexplane.o \n"

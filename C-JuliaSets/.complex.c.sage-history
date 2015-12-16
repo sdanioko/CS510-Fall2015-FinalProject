@@ -1,0 +1,87 @@
+"/********************************************************************* \nThis file contains the definition of the functions that were declared*\nin its corresponding header file. These functions allow us do some   *\narithmetic operations on complex numbers.                            *\n**********************************************************************/\n\n#include <stdlib.h>\n#include <stdio.h>\n#include <string.h>\n#include <assert.h>\n#include \"complex.h\"\n\n\n/* One should be aware of the use of constant here. In here, const struct complex or\n * const COMPLEX  means that you can you can edit the field of the structure after \n * declaration and initialization of the structure. However, you can just retrieve\n * the data from the structure */\n\n\nCOMPLEX mult2(const COMPLEX *a, const COMPLEX *b){\n        /* const struct to read only*/\n\n        /* Take two complex numbers and compute their multiplication */\n        COMPLEX theProd;\n        theProd.x_realpart = (a-> x_realpart)*(b-> x_realpart) - (a-> y_imagpart)*(b-> y_imagpart); /* set the real part of theProd */\n        theProd.y_imagpart = (a-> x_realpart)*(b-> y_imagpart) + (b-> x_realpart)*(a-> y_imagpart); /* set the imag part of theProd */\n\n        return theProd; /* Note : we only return a complex here */\n\n}\n\nCOMPLEX square(const COMPLEX *a)\n{              /*const struct to read only*/\n\n        /* Take a complex number and compute its square */\n        COMPLEX theSquare;\n        theSquare.x_realpart =(a-> x_realpart)*(a-> x_realpart)-(a-> y_imagpart)*(a-> y_imagpart); /* set the real part of theSquare */\n        theSquare.y_imagpart = 2*(a-> x_realpart)*(a-> y_imagpart); /* set the imag part of the Square*/\n\n        return theSquare; /* Note : we only return a complex here */\n\n}\n\nCOMPLEX add2(const COMPLEX *a, const COMPLEX *b)\n{            /*const struct to read only*/\n\n        /* Take two complex numbers and compute their addition */\n        COMPLEX theSum;\n        theSum.x_realpart = (a-> x_realpart) + (b-> x_realpart); /* set the real part of theSum*/\n        theSum.y_imagpart = (a-> y_imagpart) + (b-> y_imagpart); /* set the imag part of theSum*/\n\n        return theSum; /* Note : we only return a complex here */\n\n}\nCOMPLEX  juliamap(const COMPLEX *z, const COMPLEX *c)\n{                 /*const struct to read only*/\n\n        /* Take two complex numbers, then square the first one and add the result of that to the second one*/\n        COMPLEX  amappedJulia;\n        amappedJulia.x_realpart = (z-> x_realpart)*(z-> x_realpart) - (z-> y_imagpart)*(z-> y_imagpart) + (c-> x_realpart); /*set the real part of amappedJulia*/\n        amappedJulia.y_imagpart = 2*(z-> x_realpart)*(z-> y_imagpart) + (c-> y_imagpart); /* set the imag part of the amappedJulia*/\n\n        return amappedJulia; /* Note : we only return a complex here */\n\n}\n\nvoid complex_print(const COMPLEX *acomplex)\n{                  /*const struct to read only*/\n\n        printf(\" z = %Lf +  %Lfi \\n\", acomplex-> x_realpart, acomplex-> y_imagpart); /* print the info in complex z */\n\n}\n\n"
+{"patch":[[[[0,"********"],[-1,"/"],[0,"\n\n#inclu"]],347,347,17,16]],"time":1450224725566}
+{"patch":[[[[0,"********"],[1,"**"],[0,"\n\n#inclu"]],347,347,16,18]],"time":1450224723526}
+{"patch":[[[[0,"********"],[1,"/"],[0,"\n\n#inclu"]],349,349,16,17]],"time":1450224721524}
+{"patch":[[[[0,"        "],[-1,"*"],[0,"\n*******"]],275,275,17,16]],"time":1450224717599}
+{"patch":[[[[0,"        "],[-1,"                    "],[0,"\n*******"]],255,255,36,16]],"time":1450224713596}
+{"patch":[[[[0,".       "],[-1," "],[0,"\n*******"]],254,254,17,16]],"time":1450224711597}
+{"patch":[[[[0,"numbers."],[-1,"       "],[0,"\n*******"]],247,247,23,16]],"time":1450224709597}
+{"patch":[[[[0,"numbers."],[1,"             "],[0,"\n*******"]],247,247,16,29]],"time":1450224707596}
+{"patch":[[[[0,"        "],[1,"                *"],[0,"\n*******"]],260,260,16,33]],"time":1450224705595}
+{"patch":[[[[0,"        "],[-1," *"],[0,"\n*******"]],275,275,18,16]],"time":1450224703596}
+{"patch":[[[[0,"        "],[1," "],[0,"\n*******"]],275,275,16,17]],"time":1450224701596}
+{"patch":[[[[0,"        "],[-1,"    "],[0,"\n*******"]],272,272,20,16]],"time":1450224699597}
+{"patch":[[[[0,"rs. "],[-1,"                        "],[0,"\n***"]],252,252,32,8]],"time":1450224697599}
+{"patch":[[[[0,"numbers."],[-1," "],[0,"\n*******"]],247,247,17,16]],"time":1450224695592}
+{"patch":[[[[0," some   "],[-1,"*"],[0,"\narithme"]],204,204,17,16]],"time":1450224693499}
+{"patch":[[[[0,"do some "],[-1,"  "],[0,"\narithme"]],202,202,18,16]],"time":1450224691499}
+{"patch":[[[[0,"declared"],[-1,"*"],[0,"\nin its "]],133,133,17,16]],"time":1450224687498}
+{"patch":[[[[0,"declared"],[1," "],[0,"\nin its "]],133,133,16,17]],"time":1450224685497}
+{"patch":[[[[0,"declared"],[-1," "],[0,"\nin its "]],133,133,17,16]],"time":1450224683494}
+{"patch":[[[[0,"********"],[1,"*"],[0," \nThis f"]],62,62,16,17]],"time":1450224680770}
+{"patch":[[[[0,"****"],[-1,"************************"],[0,"/\n\n#"]],297,297,32,8]],"time":1450224676213}
+{"patch":[[[[0,"rs.\n"],[-1,"**********************************************"],[0,"**/\n"]],249,249,54,8]],"time":1450224674209}
+{"patch":[[[[0,"umbers.\n"],[-1,"*"],[0,"*/\n\n#inc"]],245,245,17,16]],"time":1450224672200}
+{"patch":[[[[0,"********"],[-1,"**"],[0," \nThis f"]],61,61,18,16]],"time":1450224664017}
+{"patch":[[[[0,"****"],[-1,"*************************************"],[0," \nTh"]],28,28,45,8]],"time":1450224662018}
+{"patch":[[[[0,"/**"],[-1,"*****************************"],[0," \nTh"]],0,0,36,7]],"time":1450224660014}
+{"patch":[[[[0,"/*"],[-1,"*"],[0," \nThis f"]],0,0,11,10]],"time":1450224657991}
+{"patch":[[[[0,"/* "],[-1,"\n"],[0,"This fil"]],0,0,12,11]],"time":1450224652074}
+{"patch":[[[[0,"umbers.\n"],[1,"\n\n"],[0,"*/\n\n#inc"]],175,175,16,18]],"time":1450224608185}
+{"patch":[[[[0," numbers"],[-1,"."],[0,"\n\n\n*/\n\n#"]],173,173,17,16]],"time":1450224606184}
+{"patch":[[[[0,"complex "],[-1,"numbers"],[0,"\n\n\n*/\n\n#"]],166,166,23,16]],"time":1450224604182}
+{"patch":[[[[0,"ons on c"],[-1,"omplex "],[0,"\n\n\n*/\n\n#"]],159,159,23,16]],"time":1450224602184}
+{"patch":[[[[0,"ions"],[-1," on c"],[0,"\n\n\n*"]],158,158,13,8]],"time":1450224600183}
+{"patch":[[[[0,"c operat"],[-1,"ions"],[0,"\n\n\n*/\n\n#"]],150,150,20,16]],"time":1450224598183}
+{"patch":[[[[0,"etic"],[-1," operat"],[0,"\n\n\n*"]],147,147,15,8]],"time":1450224596182}
+{"patch":[[[[0,"\nari"],[-1,"thmetic"],[0,"\n\n\n*"]],140,140,15,8]],"time":1450224594181}
+{"patch":[[[[0,"me \n"],[-1,"ari\n"],[0,"\n\n*/"]],137,137,12,8]],"time":1450224592181}
+{"patch":[[[[0,"s do som"],[-1,"e"],[0," "],[1,"e"],[0,"\n\n\n*/\n\n#"]],130,130,18,18]],"time":1450224590169}
+{"patch":[[[[0,"s do som"],[-1," e"],[1,"m"],[0,"\n\n\n*/\n\n#"]],130,130,18,17]],"time":1450224588166}
+{"patch":[[[[0," do "],[-1,"somm"],[0,"\n\n\n*"]],131,131,12,8]],"time":1450224586166}
+{"patch":[[[[0,"w us do "],[1,"the "],[0,"\n\n\n*/\n\n#"]],127,127,16,20]],"time":1450224584165}
+{"patch":[[[[0,"w us do "],[-1,"the "],[0,"\n\n\n*/\n\n#"]],127,127,20,16]],"time":1450224582165}
+{"patch":[[[[0,"ow u"],[-1,"s do "],[0,"\n\n\n*"]],126,126,13,8]],"time":1450224580164}
+{"patch":[[[[0,"s allow "],[-1,"u"],[0,"\n\n\n*/\n\n#"]],121,121,17,16]],"time":1450224578203}
+{"patch":[[[[0,"s allow "],[1,"us "],[0,"\n\n\n*/\n\n#"]],121,121,16,19]],"time":1450224576166}
+{"patch":[[[[0,"ns a"],[-1,"llow us "],[0,"\n\n\n*"]],120,120,16,8]],"time":1450224574163}
+{"patch":[[[[0,"nctions "],[-1,"a"],[0,"\n\n\n*/\n\n#"]],115,115,17,16]],"time":1450224572148}
+{"patch":[[[[0,"These fu"],[-1,"nctions "],[0,"\n\n\n*/\n\n#"]],107,107,24,16]],"time":1450224570146}
+{"patch":[[[[0,". Th"],[-1,"ese fu"],[0,"\n\n\n*"]],105,105,14,8]],"time":1450224568148}
+{"patch":[[[[0,"file"],[-1,". Th"],[0,"\n\n\n*"]],101,101,12,8]],"time":1450224566147}
+{"patch":[[[[0,"header f"],[-1,"ile"],[0,"\n\n\n*/\n\n#"]],94,94,19,16]],"time":1450224564138}
+{"patch":[[[[0," hea"],[-1,"der f"],[0,"\n\n\n*"]],93,93,13,8]],"time":1450224562136}
+{"patch":[[[[0,"pond"],[-1,"ing hea"],[0,"\n\n\n*"]],86,86,15,8]],"time":1450224560132}
+{"patch":[[[[0,"orre"],[-1,"spond"],[0,"\n\n\n*"]],81,81,13,8]],"time":1450224558132}
+{"patch":[[[[0,"in i"],[-1,"ts corre"],[0,"\n\n\n*"]],73,73,16,8]],"time":1450224556133}
+{"patch":[[[[0,"ared\nin "],[-1,"i"],[1,"the co"],[0,"\n\n\n*/\n\n#"]],68,68,17,22]],"time":1450224554132}
+{"patch":[[[[0,"\nin the "],[-1,"co"],[0,"\n\n\n*/\n\n#"]],72,72,18,16]],"time":1450224552132}
+{"patch":[[[[0,"ed\ni"],[-1,"n the "],[0,"\n\n\n*"]],70,70,14,8]],"time":1450224550130}
+{"patch":[[[[0,"eclared\n"],[-1,"i"],[0,"\n\n\n*/\n\n#"]],65,65,17,16]],"time":1450224548129}
+{"patch":[[[[0,"eclared\n"],[1,"*"],[0,"\n\n\n*/\n\n#"]],65,65,16,17]],"time":1450224541392}
+{"patch":[[[[0,"eclared\n"],[-1,"*"],[0,"\n\n\n*/\n\n#"]],65,65,17,16]],"time":1450224539390}
+{"patch":[[[[0,"ecla"],[-1,"red\n"],[0,"\n\n\n*"]],65,65,12,8]],"time":1450224537239}
+{"patch":[[[[0,"hat were"],[-1," decla"],[0,"\n\n\n*/\n\n#"]],55,55,22,16]],"time":1450224535214}
+{"patch":[[[[0,"ions"],[-1," that were"],[0,"\n\n\n*"]],49,49,18,8]],"time":1450224533204}
+{"patch":[[[[0," functio"],[-1,"ns"],[0,"\n\n\n*/\n\n#"]],43,43,18,16]],"time":1450224531202}
+{"patch":[[[[0,"he f"],[-1,"unctio"],[0,"\n\n\n*"]],41,41,14,8]],"time":1450224529206}
+{"patch":[[[[0," of the "],[-1,"f"],[0,"\n\n\n*/\n\n#"]],36,36,17,16]],"time":1450224527239}
+{"patch":[[[[0,"ion of t"],[-1,"he "],[0,"\n\n\n*/\n\n#"]],33,33,19,16]],"time":1450224522531}
+{"patch":[[[[0,"e defini"],[-1,"tion of t"],[0,"\n\n\n*/\n\n#"]],24,24,25,16]],"time":1450224520528}
+{"patch":[[[[0,"ns t"],[-1,"he defini"],[0,"\n\n\n*"]],19,19,17,8]],"time":1450224518528}
+{"patch":[[[[0,"ile "],[-1,"contains t"],[0,"\n\n\n*"]],9,9,18,8]],"time":1450224516525}
+{"patch":[[[[0,"his file"],[-1," "],[0,"\n\n\n*/\n\n#"]],4,4,17,16]],"time":1450224514523}
+{"patch":[[[[0,"* Th"],[-1,"is file"],[0,"\n\n\n*"]],1,1,15,8]],"time":1450224512479}
+{"patch":[[[[0,"/* "],[-1,"Th"],[0,"\n\n\n*"]],0,0,9,7]],"time":1450224510480}
+{"patch":[[[[0,"/*"],[-1," "],[0,"\n\n\n*/\n\n#"]],0,0,11,10]],"time":1450224508479}
+{"patch":[[[[0,"/*\n\n\n"],[-1,"*/"],[0,"\n\n#inclu"]],0,0,15,13]],"time":1450224506008}
+{"patch":[[[[0,"/*\n\n\n"],[-1,"\n\n"],[0,"#include"]],0,0,15,13]],"time":1450224504008}
+{"patch":[[[[0,"/"],[-1,"*\n"],[0,"\n\n#i"]],0,0,7,5]],"time":1450224501999}
+{"patch":[[[[-1,"/"],[0,"\n\n#inclu"]],0,0,9,8]],"time":1450224500034}
+{"patch":[[[[1,"***"],[0,"\n\n#inclu"]],0,0,8,11]],"time":1450224496125}
+{"patch":[[[[-1,"**"],[0,"*\n\n#incl"]],0,0,10,8]],"time":1450224494124}
+{"patch":[[[[-1,"*"],[0,"\n\n#inclu"]],0,0,9,8]],"time":1450224492123}
+{"patch":[[[[1,"// "],[0,"\n\n#inclu"]],0,0,8,11]],"time":1450224488658}
+{"patch":[[[[-1,"// "],[0,"\n\n#i"]],0,0,7,4]],"time":1450224486620}
+{"patch":[[[[-1,"\n"],[0,"\n#includ"]],0,0,9,8]],"time":1450224484620}
+{"patch":[[[[-1,"\n"],[0,"#include <stdlib.h>\n"]],0,0,21,20]],"time":1450224482624}

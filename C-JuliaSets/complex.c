@@ -1,3 +1,9 @@
+/********************************************************************* 
+This file contains the definition of the functions that were declared*
+in its corresponding header file. These functions allow us do some   *
+arithmetic operations on complex numbers.                            *
+**********************************************************************/
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>

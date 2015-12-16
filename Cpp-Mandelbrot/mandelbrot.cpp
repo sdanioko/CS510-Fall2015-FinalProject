@@ -1,3 +1,10 @@
+/**************************************************************************
+This file contains the implimentation of the Mandelrbot set via finding   *
+set of values c in the complex plane for which the orbit of 0 under the   *
+iteration of the complex uadratic polynomial                              *
+z(n+1) = z(n)^2 + c                                                       *
+***************************************************************************/
+
 #include <iostream>
 #include <complex>
 #include <cstdio>
@@ -35,19 +42,19 @@ int main(int argc,char *argv[]){
 	cplane cplane1;
 	cplane1.set(xmin,xmax,ymin,ymax,xpoints,ypoints);
 
-	lcomplex compC (0,0);
+	lcomplex compC (0,0); // Initialize the entries
 	int out;
 	for(int y =0;y<cplane1.ypoints;y++){
 		for(int x =0;x<cplane1.xpoints;x++){
 			lcomplex tmp = cplane1.mat(x,y);
 			for(out=0;out<1000;out++){
-				if(std::abs(tmp)>2.0)break;
+				if(std::abs(tmp)>2.0)break; // to avoid an infinity loop
 				tmp = juliamap(tmp,cplane1.mat(x,y));
 			}
 			// Print out data
 			std::cout << cplane1.mat(x,y).real() << " " << cplane1.mat(x,y).imag() << " " << out << std::endl;
 		}
-//		std::cout << std::endl;
+     //		std::cout << std::endl;
 	}
-
+    cplane1.mat.clear(); // This releases the memory
 }

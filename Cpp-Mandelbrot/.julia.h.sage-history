@@ -1,0 +1,17 @@
+"#include <iostream>\n#include <complex>\n#include <cstdio>\n#include <boost/numeric/ublas/matrix.hpp>\n#include <boost/numeric/ublas/io.hpp>\n\n// Declare boost struct template reference\ntypedef std::complex<long double> lcomplex;\nlcomplex juliamap(lcomplex z,lcomplex c);\n"
+{"patch":[[[[0,"refe"],[-1,"rence"],[0,"\ntyp"]],171,171,13,8]],"time":1450218886987}
+{"patch":[[[[0,"mpla"],[-1,"te refe"],[0,"\ntyp"]],164,164,15,8]],"time":1450218884983}
+{"patch":[[[[0,"t st"],[-1,"ruct templa"],[0,"\ntyp"]],153,153,19,8]],"time":1450218882981}
+{"patch":[[[[0,"re b"],[-1,"oost st"],[0,"\ntyp"]],146,146,15,8]],"time":1450218880981}
+{"patch":[[[[0,"Declare "],[-1,"b"],[0,"\ntypedef"]],141,141,17,16]],"time":1450218878985}
+{"patch":[[[[0," Dec"],[-1,"lare "],[0,"\ntyp"]],140,140,13,8]],"time":1450218774426}
+{"patch":[[[[0,"p>\n\n"],[-1,"// Dec"],[0,"\ntyp"]],134,134,14,8]],"time":1450218772426}
+{"patch":[[[[0,"o.hpp>\n\n"],[1,"# Dec"],[0,"\ntypedef"]],130,130,16,21]],"time":1450218770432}
+{"patch":[[[[0,">\n\n# Dec"],[1,"lare"],[0,"\ntypedef"]],135,135,16,20]],"time":1450218768428}
+{"patch":[[[[0,"# Declar"],[-1,"e"],[0,"\ntypedef"]],138,138,17,16]],"time":1450218766429}
+{"patch":[[[[0,"\n\n# "],[-1,"Declar"],[0,"\ntyp"]],136,136,14,8]],"time":1450218764428}
+{"patch":[[[[0,"p>\n\n"],[-1,"# "],[0,"\ntyp"]],134,134,10,8]],"time":1450218762427}
+{"patch":[[[[0,".hpp>\n\n\n"],[1,"#"],[0,"typedef "]],131,131,16,17]],"time":1450218760425}
+{"patch":[[[[0,"o.hpp>\n\n"],[-1,"\n#"],[0,"typedef "]],130,130,18,16]],"time":1450218758428}
+{"patch":[[[[-1,"#"],[0,"include <iostrea"]],0,0,17,16]],"time":1449199897492}
+{"patch":[[[[-1,"i"],[0,"nclude <iostream"]],0,0,17,16]],"time":1449199892603}
