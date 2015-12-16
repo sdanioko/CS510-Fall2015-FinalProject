@@ -1,1 +1,0 @@
-"#include <iostream>\n#include <complex>\n#include <cstdio>\n#include <boost/numeric/ublas/matrix.hpp>\n#include <boost/numeric/ublas/io.hpp>\n\n#include \"julia.h\"\n// Function to calculate Julia set\nlcomplex juliamap(lcomplex z,lcomplex c){\n\tlcomplex compjulia;\n\n\tcompjulia = z*z + c;\n\n\treturn compjulia;\n}\n"
